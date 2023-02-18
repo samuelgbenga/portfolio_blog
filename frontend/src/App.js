@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import UserProfile from "./components/userProfile";
+import UserPortfolio from "./components/userPortfolio";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="w-full lg:min-h-screen bg-dark-theme text-white">
+      <div className="w-full flex flex-col min-h-screen lg:flex-row lg:justify-between relative">
+        <div className="lg:sticky lg:top-0 lg:h-screen  p-20  grow">
+          <UserProfile />
+        </div>
+        <div className="grow ">
+          <UserPortfolio />
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
