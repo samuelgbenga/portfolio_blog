@@ -39,11 +39,11 @@ const App = () => {
         dark && "dark"
       } relative`}
     >
-      <div className="w-full flex flex-col min-h-screen lg:flex-row lg:justify-between relative dark:text-white dark:bg-dark-theme">
-        <div className="lg:sticky lg:top-0 lg:h-screen  p-20  grow ">
+      <div className="w-full grid min-h-screen lg:grid-cols-2 lg:justify-between relative dark:text-white dark:bg-dark-theme">
+        <div className="lg:sticky lg:top-0 lg:h-screen  ">
           <UserProfile />
         </div>
-        <div className="grow ">
+        <div className="">
           <UserPortfolio />
         </div>
       </div>
