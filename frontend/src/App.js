@@ -1,10 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import UserProfile from "./components/userProfile";
 import UserPortfolio from "./components/userPortfolio";
 import { BsFillMoonStarsFill, BsFillSunFill } from "react-icons/bs";
 
 const App = () => {
   const [dark, setDark] = useState(true);
+  const [themeMode, setThemeMode] = useState(localStorage.theme);
+
+  const handleTheme = () => {
+    setDark((prev) => !prev);
+
+    if (dark) {
+      setThemeMode("light");
+    } else {
+      setThemeMode("dark");
+    }
+  };
+
+  useEffect(() => {
+    localStorage.setItem("theme", themeMode);
+    if (localStorage) {
+      switch (localStorage.theme) {
+        case "dark":
+          setDark(true);
+          break;
+        case "light":
+          setDark(false);
+          break;
+        default:
+          break;
+      }
+    }
+  }, [themeMode]);
+
   return (
     <div
       className={`w-full lg:min-h-screen bg-white-theme text-black ${
@@ -21,7 +49,7 @@ const App = () => {
       </div>
       <div
         className="fixed top-[92%] right-10  cursor text-[40px]"
-        onClick={() => setDark((prev) => !prev)}
+        onClick={handleTheme}
       >
         {dark ? (
           <BsFillSunFill className="text-white" />
@@ -29,6 +57,7 @@ const App = () => {
           <BsFillMoonStarsFill className="" />
         )}
       </div>
+      {console.log(themeMode)}
     </div>
   );
 };
