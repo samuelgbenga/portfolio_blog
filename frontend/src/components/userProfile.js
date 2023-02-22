@@ -6,8 +6,8 @@ import Dp from "./../utils/dp.jpeg";
 
 const userProfile = () => {
   return (
-    <div className="p-8 py-6 ">
-      <div>
+    <div className="px-10 py-8 relatiive  lg:h-full">
+      <div className="">
         <h1 className="text-4xl font-bold py-6">Samuel Gbenga Joseph</h1>
         <h2 className="text-2xl font-medium py-3">
           Computer Science Graduate at Fulokoja
@@ -25,7 +25,7 @@ const userProfile = () => {
           <div>02 _____ BLOG_POSTS</div>
           <div>03 _____ CERTIFICATIONS</div>
         </div>
-        <div className="flex gap-9 items-center py-6  lg:mt-20">
+        <div className="flex gap-9 items-center py-6  lg:absolute lg:bottom-6">
           {" "}
           <img
             src={Dp}
