@@ -1,11 +1,17 @@
 import React from "react";
+import Projects from "./subCompo/projects";
 
 const userPortfolio = () => {
   return (
-    <div className="max-w-full flex flex-col items-center">
-      <div className="w-[96%] grid grid-cols-1 ">
-        <div className="text-[11px] mb-8 lg:hidden">PROJECTS</div>
-        <div className=" h-40 bg-[#202022]"></div>
+    <div className="max-w-full  flex flex-col items-center py-12 px-6">
+      <div className="w-[96%] grid grid-cols-1 gap-2">
+        <div className="text-[12px] mb-6 lg:hidden">PROJECTS</div>
+        <Projects />
+        <Projects />
+        <Projects />
+        <Projects />
+        <Projects />
+        <Projects />
       </div>
     </div>
   );
