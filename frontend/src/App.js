@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import UserProfile from "./components/userProfile";
 import UserPortfolio from "./components/userPortfolio";
 import { BsFillMoonStarsFill, BsFillSunFill } from "react-icons/bs";
+import axios from "axios";
 
 const App = () => {
   const [dark, setDark] = useState(true);
+  const [projects, setProjects] = useState([]);
   const [themeMode, setThemeMode] = useState(localStorage.theme);
 
   const handleTheme = () => {
@@ -33,6 +35,18 @@ const App = () => {
     }
   }, [themeMode]);
 
+  useEffect(() => {
+    const handleConnect = async () => {
+      axios
+        .get("http://localhost:5000/projects")
+        .then((data) => {
+          setProjects(data.data);
+        })
+        .catch((err) => console.log(err));
+    };
+    handleConnect();
+  }, []);
+
   return (
     <div
       className={`w-full lg:min-h-screen bg-white-theme text-black ${
@@ -44,7 +58,7 @@ const App = () => {
           <UserProfile />
         </div>
         <div className=" ">
-          <UserPortfolio />
+          <UserPortfolio projects={projects} />
         </div>
       </div>
       <div
@@ -57,7 +71,6 @@ const App = () => {
           <BsFillMoonStarsFill className="" />
         )}
       </div>
-      {console.log(themeMode)}
     </div>
   );
 };
