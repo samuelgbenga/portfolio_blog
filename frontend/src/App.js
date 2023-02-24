@@ -53,23 +53,25 @@ const App = () => {
         dark && "dark"
       } relative`}
     >
-      <div className="w-full  min-h-screen gap-0 lg:grid lg:grid-cols-2 lg:justify-between relative dark:text-white dark:bg-dark-theme">
-        <div className=" h-auto lg:top-0  lg:sticky lg:h-screen  ">
-          <UserProfile />
+      <div className=" w-full bg-white-theme dark:text-white dark:bg-dark-theme">
+        <div className="max-w-[1350px] m-auto  min-h-screen gap-0 lg:grid lg:grid-cols-2 lg:justify-between relative ">
+          <div className=" h-auto lg:top-0  lg:sticky lg:h-screen  ">
+            <UserProfile />
+          </div>
+          <div className=" ">
+            <UserPortfolio projects={projects} />
+          </div>
         </div>
-        <div className=" ">
-          <UserPortfolio projects={projects} />
+        <div
+          className="fixed top-[92%] right-10  cursor text-[40px]"
+          onClick={handleTheme}
+        >
+          {dark ? (
+            <BsFillSunFill className="text-white" />
+          ) : (
+            <BsFillMoonStarsFill className="" />
+          )}
         </div>
-      </div>
-      <div
-        className="fixed top-[92%] right-10  cursor text-[40px]"
-        onClick={handleTheme}
-      >
-        {dark ? (
-          <BsFillSunFill className="text-white" />
-        ) : (
-          <BsFillMoonStarsFill className="" />
-        )}
       </div>
     </div>
   );

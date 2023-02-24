@@ -14,10 +14,33 @@ export const getProjects = async (req, res) => {
 };
 
 export const addProjects = async (req, res) => {
-  const { language, path, ratings, tools, link } = req.body;
+  const {
+    language,
+    path,
+    ratings,
+    tools,
+    link,
+    category,
+    title,
+    date,
+    content,
+    description,
+  } = req.body;
+
   let newProject;
   try {
-    newProject = new projectModel({ language, path, ratings, tools, link });
+    newProject = new projectModel({
+      language,
+      path,
+      ratings,
+      tools,
+      link,
+      category,
+      title,
+      date,
+      content,
+      description,
+    });
     await newProject.save();
   } catch (error) {
     console.log(error);

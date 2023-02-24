@@ -6,6 +6,14 @@ const projectSchema = new mongoose.Schema({
   ratings: Number,
   tools: String,
   link: String,
+  title: String,
+  description: String,
+  content: String,
+  date: String,
+  type: String,
+  name: String,
+  date_recieved: String,
+  category: String,
 });
 
 export const projectModel = mongoose.model("projectModel", projectSchema);

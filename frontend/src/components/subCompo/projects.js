@@ -1,16 +1,14 @@
 import React from "react";
 import { AiFillStar } from "react-icons/ai";
-const projects = () => {
+const projects = ({ language, path, tools, link, ratings }) => {
   return (
     <div>
       <div className=" h-[12rem] bg-[#202022] flex flex-col justify-around p-6">
-        <div className="text-sm">TYPESCRIPT</div>
-        <div className="text-lg">samuelgbenga/portfolio</div>
-        <div className="text-base">
-          Created, calculated, and format money in JavaScript and TypeScript
-        </div>
+        <div className="text-sm uppercase">{language}</div>
+        <div className="text-lg">{path}</div>
+        <div className="text-base">{tools}</div>
         <div className="flex items-center gap-1 text-sm">
-          <AiFillStar /> 4,000
+          <AiFillStar /> {ratings}
         </div>
       </div>
     </div>
