@@ -51,7 +51,7 @@ const App = () => {
     <div
       className={`w-full lg:min-h-screen bg-white-theme text-black ${
         dark && "dark"
-      } relative`}
+      } relative `}
     >
       <div className=" w-full bg-white-theme dark:text-white dark:bg-dark-theme">
         <div className="max-w-[1350px] m-auto  min-h-screen gap-0 lg:grid lg:grid-cols-2 lg:justify-between relative ">

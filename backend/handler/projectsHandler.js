@@ -15,35 +15,42 @@ export const getProjects = async (req, res) => {
 
 export const addProjects = async (req, res) => {
   const {
-    language,
-    path,
-    ratings,
-    tools,
-    link,
+    proj_language,
+    proj_name,
+    proj_tools,
+    proj_ratings,
+    proj_link,
+    blog_title,
+    blog_desc,
+    blog_content,
+    blog_date,
+    cert_title,
+    cert_desc,
+    cert_date,
     category,
-    title,
-    date,
-    content,
-    description,
   } = req.body;
 
   let newProject;
   try {
     newProject = new projectModel({
-      language,
-      path,
-      ratings,
-      tools,
-      link,
+      proj_language,
+      proj_name,
+      proj_tools,
+      proj_ratings,
+      proj_link,
+      blog_title,
+      blog_desc,
+      blog_content,
+      blog_date,
+      cert_title,
+      cert_desc,
+      cert_date,
       category,
-      title,
-      date,
-      content,
-      description,
     });
     await newProject.save();
   } catch (error) {
-    console.log(error);
+    res.status(400).json({ message: "project not added" });
+    return console.log(error);
   }
   if (newProject) {
     res.status(200).json({ message: "succesufully added" });
