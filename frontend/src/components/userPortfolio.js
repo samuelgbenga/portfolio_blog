@@ -10,11 +10,11 @@ const userPortfolio = ({ projects }) => {
         <div className="text-[12px] mb-6 lg:hidden">PROJECTS</div>
 
         {projects &&
-          projects.map((project) => {
+          projects.map((project, i) => {
             if (project.category === "project")
               return (
                 <Projects
-                  key={project._id}
+                  key={i}
                   language={project.proj_language}
                   path={project.proj_name}
                   tools={project.proj_tools}
@@ -22,7 +22,7 @@ const userPortfolio = ({ projects }) => {
                   ratings={project.proj_ratings}
                 />
               );
-            return <></>;
+            return <div key={i}></div>;
           })}
       </div>
 
@@ -30,18 +30,18 @@ const userPortfolio = ({ projects }) => {
         <div className="text-[12px] mb-6 lg:hidden">BLOG_POST</div>
         <div className="grid grid-cols-1 gap-2 lg:grid-cols-2  ">
           {projects &&
-            projects.map((project) => {
+            projects.map((project, i) => {
               if (project.category === "blogpost")
                 return (
                   <BlogPost
-                    key={project._id}
+                    key={i}
                     title={project.blog_title}
                     description={project.blog_desc}
                     date={project.blog_date}
                     content={project.blog_content}
                   />
                 );
-              return <></>;
+              return <div key={i}></div>;
             })}
         </div>
       </div>
@@ -50,17 +50,17 @@ const userPortfolio = ({ projects }) => {
         <div className="text-[12px] mb-6 lg:hidden">CERTIFICATIONS</div>
         <div className="grid grid-cols-1 gap-2 ">
           {projects &&
-            projects.map((project) => {
+            projects.map((project, i) => {
               if (project.category === "certification")
                 return (
                   <Certifications
-                    key={project._id}
+                    key={i}
                     title={project.cert_title}
                     description={project.cert_desc}
                     date={project.cert_date}
                   />
                 );
-              return <></>;
+              return <div key={i}></div>;
             })}
         </div>
       </div>

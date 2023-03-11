@@ -3,6 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import projectsRoute from "./routes/projecsRoute.js";
+import loginRoute from "./routes/loginRoute.js";
 
 // initials
 const app = express();
@@ -13,6 +14,7 @@ const port = process.env.PORT || 5000;
 
 // connect to the different routes
 app.use("/", projectsRoute);
+app.use("/login", loginRoute);
 
 // connecting to mongodb
 mongoose.set("strictQuery", true);

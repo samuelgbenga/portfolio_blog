@@ -26,4 +26,25 @@
 ### the page
 ## use robot.txt to block
 ## block user password after 5 to 10 trials
-## create on same page since its just a small scale application// (same page
+## create on same page since its just a small scale application// (same page)
+
+## useful Dashboard links : https://dev.to/okeken/how-to-create-an-admin-panel-in-react-js-26d6
+		: https://www.codingame.com/playgrounds/9087/integrate-admin-template-in-reactjs
+		
+
+## how to go about the admin panel and login page
+## using react frame/template for admin  
+##### npm i react-admin ra-data-json-server prop-types
+## using react-admin nice ***
+## AdminLTE is less flexible than react-admin form more complex project.(its a perception)**
+
+## Adding login authentication to React application **** (for auth and login)
+#### react-router-dom
+### what is uncontrolled component in react
+## what is propTypes in reactjs
+
+###### autofocus in tailwindcss 
+
+# for now the focus is to get the functionalities
+##### next step will be to use json token authentication key
+
