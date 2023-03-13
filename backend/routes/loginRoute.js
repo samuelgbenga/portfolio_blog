@@ -1,4 +1,5 @@
 import express from "express";
+
 import { handleLogin, handleRegister } from "../handler/handleLogin.js";
 
 const loginRoute = express();
