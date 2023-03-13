@@ -7,7 +7,9 @@ const handleLogin = async (credentials) => {
     .then((data) => {
       return data.data;
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      return console.log(err.response);
+    });
 };
 
 const Login = ({ setToken }) => {
@@ -17,7 +19,7 @@ const Login = ({ setToken }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = await handleLogin({
-      username,
+      email: username,
       password,
     });
 

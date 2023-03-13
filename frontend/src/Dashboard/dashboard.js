@@ -1,8 +1,13 @@
+import { useEffect } from "react";
 import Login from "./login";
 import useToken from "./useToken";
 
 const Dashboard = () => {
   const { token, setToken } = useToken();
+
+  useEffect(() => {
+    if (token) localStorage.removeItem("token");
+  }, [token]);
 
   if (!token) {
     return <Login setToken={setToken} />;

@@ -1,8 +1,9 @@
 import express from "express";
-import { handleLogin } from "../handler/handleLogin.js";
+import { handleLogin, handleRegister } from "../handler/handleLogin.js";
 
 const loginRoute = express();
 
-loginRoute.post("/", handleLogin);
+loginRoute.post("/register", handleRegister);
+loginRoute.post("/login", handleLogin);
 
 export default loginRoute;
