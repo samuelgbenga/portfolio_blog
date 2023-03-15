@@ -1,4 +1,5 @@
 import { projectModel } from "../model/projectsModel.js";
+import { isValidObjectId } from "mongoose";
 
 export const getProjects = async (req, res) => {
   let projects;
@@ -58,4 +59,39 @@ export const addProjects = async (req, res) => {
   }
   res.status(400).json({ message: "project not added" });
   return console.log("project not added");
+};
+
+export const deleteProject = async (req, res) => {
+  const { id } = req.body;
+  if (!isValidObjectId(id))
+    return res.status(400).json({ message: "invalide ObjectId" });
+  let project;
+  try {
+    project = await projectModel.findByIdAndDelete(id);
+  } catch (error) {
+    return console.log(error);
+  }
+  if (!project) {
+    return res.status(400).json({ message: "unable to delete" });
+  }
+  return res.status(200).json({ message: "deleted succesufully" });
+};
+
+export const editProject = async (req, res) => {
+  const id = req.params.id;
+
+  let update;
+
+  if (!isValidObjectId(id))
+    return res.status(400).json({ message: "invalide ObjectId" });
+
+  try {
+    update = await projectModel.findByIdAndUpdate(id, req.body);
+  } catch (error) {
+    return console.log(error);
+  }
+  if (!update) {
+    return res.status(400).json({ message: "unabel to update" });
+  }
+  return res.status(200).json({ message: `project with id: ${id} is updated` });
 };

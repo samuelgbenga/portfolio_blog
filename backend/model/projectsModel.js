@@ -14,6 +14,10 @@ const projectSchema = new mongoose.Schema({
   cert_desc: String,
   cert_date: String,
   category: { type: String, required: true },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 export const projectModel = mongoose.model("projectModel", projectSchema);

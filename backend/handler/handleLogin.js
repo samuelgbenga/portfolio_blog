@@ -40,7 +40,7 @@ export const handleRegister = async (req, res) => {
         res.status(200).json(user);
         return console.log("New user successfully created");
       })
-      .catch((err) => console.log(error));
+      .catch((err) => console.log(err));
   } catch (error) {
     return console.log(error);
   }
@@ -82,7 +82,7 @@ export const handleLogin = async (req, res) => {
     jwt.sign(
       payload,
       process.env.KEY,
-      { expiresIn: 31556929 },
+      { expiresIn: 31556929 }, //
       (err, token) => {
         res.json({ success: true, token: "Bearer" + token });
       }

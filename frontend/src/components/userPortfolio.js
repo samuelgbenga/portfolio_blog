@@ -35,10 +35,10 @@ const userPortfolio = ({ projects }) => {
                 return (
                   <BlogPost
                     key={i}
+                    id={project._id}
                     title={project.blog_title}
                     description={project.blog_desc}
                     date={project.blog_date}
-                    content={project.blog_content}
                   />
                 );
               return <div key={i}></div>;

@@ -47,5 +47,9 @@
 
 # for now the focus is to get the functionalities
 ##### next step will be to use json token authentication key
-## on it: 
+## on it:  (completed) with additional backend delete and edit functionalities
+
+## Next is to set up the front admin dashboard
+## Dashboard Journey
+##### npm i react-admin ra-data-json-server prop-types
 

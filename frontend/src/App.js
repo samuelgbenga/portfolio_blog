@@ -4,6 +4,7 @@ import UserPortfolio from "./components/userPortfolio";
 import { BsFillMoonStarsFill, BsFillSunFill } from "react-icons/bs";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Dashboard from "./Dashboard/dashboard";
+import SinglePost from "./components/subCompo/singlePost/singlePost";
 import axios from "axios";
 
 const App = () => {
@@ -83,7 +84,11 @@ const App = () => {
       >
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/admin" element={<Dashboard />} />
+          <Route path="/admin" element={<Dashboard projects={projects} />} />
+          <Route
+            path="/content/:id"
+            element={<SinglePost projects={projects} />}
+          />
         </Routes>
       </div>
     </BrowserRouter>
