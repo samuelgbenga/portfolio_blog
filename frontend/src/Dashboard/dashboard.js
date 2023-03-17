@@ -3,40 +3,55 @@ import useToken from "./useToken";
 import { RiDashboardFill } from "react-icons/ri";
 import { GrProjects, GrCertificate } from "react-icons/gr";
 import { FaMicroblog } from "react-icons/fa";
-import { useState } from "react";
+//import { useState } from "react";
 import DefaultPage from "./dashboardCompo/DefaultPage";
 import Project from "./dashboardCompo/Project";
 import Blog from "./dashboardCompo/Blog";
 import Cert from "./dashboardCompo/Cert";
+import useDisplay from "./dashboardUtils/useDisplay";
+import { useEffect, useState } from "react";
 
-const Dashboard = ({ projects }) => {
+const displayObject = {
+  default: true,
+  project: false,
+  blog: false,
+  cert: false,
+};
+
+const Dashboard = ({ projects, lastLocation, setLastLocation }) => {
   const { token, setToken } = useToken();
-  const [display, setDisplay] = useState({
-    default: true,
-    project: false,
-    blog: false,
-    cert: false,
-  });
+  const { display, setDisplay } = useDisplay();
+  const [cdisplay, setcDisplay] = useState(
+    localStorage.dashboardcDisplay
+      ? JSON.parse(localStorage.dashboardcDisplay)
+      : displayObject
+  );
 
   if (token) {
     setTimeout(() => {
       localStorage.removeItem("token");
-    }, 120000);
+    }, 2400000);
   }
+
+  // handle onClick
+  const handleOnClick = (name) => {
+    Object.keys(displayObject).forEach((elem) => {
+      if (elem === name) {
+        setcDisplay((prev) => ({ ...prev, [name]: true }));
+      } else {
+        setcDisplay((prev) => ({ ...prev, [elem]: false }));
+      }
+    });
+    localStorage.setItem("dashboardcDisplay", JSON.stringify(cdisplay));
+  };
+
+  useEffect(() => {
+    setDisplay(cdisplay);
+  }, [setDisplay, cdisplay]);
 
   if (!token) {
     return <Login setToken={setToken} />;
   }
-  // handle onClick
-  const handleOnClick = (name) => {
-    Object.keys(display).forEach((elem) => {
-      if (elem === name) {
-        setDisplay((prev) => ({ ...prev, [name]: true }));
-      } else {
-        setDisplay((prev) => ({ ...prev, [elem]: false }));
-      }
-    });
-  };
 
   return (
     <div className=" h-screen flex relative">

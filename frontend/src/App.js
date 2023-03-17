@@ -11,7 +11,7 @@ const App = () => {
   const [dark, setDark] = useState(true);
   const [projects, setProjects] = useState([]);
   const [themeMode, setThemeMode] = useState(localStorage.theme);
-
+  const [lastLocation, setLastLocation] = useState("");
   const handleTheme = () => {
     setDark((prev) => !prev);
 
@@ -84,7 +84,16 @@ const App = () => {
       >
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/admin" element={<Dashboard projects={projects} />} />
+          <Route
+            path="/admin"
+            element={
+              <Dashboard
+                projects={projects}
+                lastLocation={lastLocation}
+                setLastLocation={setLastLocation}
+              />
+            }
+          />
           <Route
             path="/content/:id"
             element={<SinglePost projects={projects} />}
