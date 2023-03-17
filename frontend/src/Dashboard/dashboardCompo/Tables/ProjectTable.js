@@ -1,6 +1,8 @@
 import { useTable } from "react-table";
+import { RiDeleteBin5Line } from "react-icons/ri";
+import { FiEdit } from "react-icons/fi";
 
-const ProjectTable = ({ columns, data }) => {
+const ProjectTable = ({ columns, data, handleDelete }) => {
   const tableInstances = useTable({ columns, data });
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
@@ -25,6 +27,16 @@ const ProjectTable = ({ columns, data }) => {
               {row.cells.map((cell) => {
                 return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
               })}
+              <td className="flex mx-4 items-center justify-center mt-1 gap-3">
+                <span className="text-red-400  cursor-pointer">
+                  <RiDeleteBin5Line
+                    onClick={() => handleDelete(row.values._id)}
+                  />
+                </span>{" "}
+                <span className="text-blue-400 cursor-pointer">
+                  <FiEdit />
+                </span>{" "}
+              </td>
             </tr>
           );
         })}

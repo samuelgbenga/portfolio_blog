@@ -1,7 +1,11 @@
 import React, { useMemo } from "react";
 import ProjectTable from "./Tables/ProjectTable";
 
-const Project = ({ projects }) => {
+const Project = ({ projects, handleDelete }) => {
+  const projectCat = projects.filter(
+    (project) => project.category === "project"
+  );
+
   const columns = useMemo(
     () => [
       {
@@ -29,11 +33,11 @@ const Project = ({ projects }) => {
     []
   );
 
-  const data = useMemo(() => projects, [projects]);
+  const data = useMemo(() => projectCat, [projectCat]);
 
   return (
     <div>
-      <ProjectTable data={data} columns={columns} />
+      <ProjectTable data={data} columns={columns} handleDelete={handleDelete} />
     </div>
   );
 };

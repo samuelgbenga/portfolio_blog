@@ -18,7 +18,7 @@ const displayObject = {
   cert: false,
 };
 
-const Dashboard = ({ projects, lastLocation, setLastLocation }) => {
+const Dashboard = ({ projects, handleDelete }) => {
   const { token, setToken } = useToken();
   const { display, setDisplay } = useDisplay();
   const [cdisplay, setcDisplay] = useState(
@@ -93,13 +93,13 @@ const Dashboard = ({ projects, lastLocation, setLastLocation }) => {
           <DefaultPage />
         </div>
         <div className={` ${!display.project && "hidden"}`}>
-          <Project projects={projects} />
+          <Project projects={projects} handleDelete={handleDelete} />
         </div>
         <div className={` ${!display.blog && "hidden"}`}>
-          <Blog projects={projects} />
+          <Blog projects={projects} handleDelete={handleDelete} />
         </div>
         <div className={` ${!display.cert && "hidden"}`}>
-          <Cert projects={projects} />
+          <Cert projects={projects} handleDelete={handleDelete} />
         </div>
       </div>
     </div>

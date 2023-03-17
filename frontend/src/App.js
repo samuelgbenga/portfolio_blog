@@ -49,7 +49,9 @@ const App = () => {
     };
     handleConnect();
   }, []);
-
+  const handleDelete = () => {
+    console.log("delete successfull");
+  };
   const HomePage = () => {
     return (
       <div className=" w-full bg-white-theme dark:text-white dark:bg-dark-theme">
@@ -91,6 +93,7 @@ const App = () => {
                 projects={projects}
                 lastLocation={lastLocation}
                 setLastLocation={setLastLocation}
+                handleDelete={handleDelete}
               />
             }
           />
