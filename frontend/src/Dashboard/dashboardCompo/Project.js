@@ -111,7 +111,7 @@ const Project = ({
       },
       {
         Header: "Url",
-        accessor: "Proj_link",
+        accessor: "proj_link",
       },
       {
         Header: "Ratings",
@@ -143,7 +143,7 @@ const Project = ({
   }
 
   return (
-    <div className="min-h-screen overflow-auto bg-gray-100 text-gray-900">
+    <div className="">
       <span
         className="text-3xl text-green-300 uppercase flex items-center mb-2 cursor-pointer "
         onClick={() => setToggleAdd(true)}

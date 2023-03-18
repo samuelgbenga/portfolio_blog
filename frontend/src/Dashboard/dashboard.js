@@ -61,7 +61,7 @@ const Dashboard = ({
   }
 
   return (
-    <div className=" h-screen flex relative">
+    <div className=" h-screen flex relative  overflow-hidden w-screen">
       <div className="uppercase p-16 pt-12 pl-6 sticky top-0 h-full bg-gray-200 m-auto ">
         <div
           className="flex items-center gap-1 cursor-pointer"
@@ -101,25 +101,27 @@ const Dashboard = ({
         </div>
       </div>
 
-      <div className="px-6 py-12 grow ">
-        <div className={` ${!display.default && "hidden"}`}>
-          <DefaultPage />
-        </div>
-        <div className={` ${!display.project && "hidden"}`}>
-          <Project
-            projects={projects}
-            handleDelete={handleDelete}
-            handleAddNew={handleAddNew}
-            handleUpdate={handleUpdate}
-            handleConnect={handleConnect}
-          />
-        </div>
-        <div className={` ${!display.blog && "hidden"}`}>
-          <Blog projects={projects} handleDelete={handleDelete} />
-        </div>
-        <div className={` ${!display.cert && "hidden"}`}>
-          <Cert projects={projects} handleDelete={handleDelete} />
-        </div>
+      <div className="px-6 py-12 grow min-h-full bg-gray-100 text-gray-900 w-full overflow-x-hidden">
+        <main className="w-full mx-auto px-4 sm:px-6 lg:px-8 pt-4   overflow-x-scroll min-h-full">
+          <div className={` ${!display.default && "hidden"}`}>
+            <DefaultPage />
+          </div>
+          <div className={` ${!display.project && "hidden"}`}>
+            <Project
+              projects={projects}
+              handleDelete={handleDelete}
+              handleAddNew={handleAddNew}
+              handleUpdate={handleUpdate}
+              handleConnect={handleConnect}
+            />
+          </div>
+          <div className={` ${!display.blog && "hidden"}`}>
+            <Blog projects={projects} handleDelete={handleDelete} />
+          </div>
+          <div className={` ${!display.cert && "hidden"}`}>
+            <Cert projects={projects} handleDelete={handleDelete} />
+          </div>
+        </main>
       </div>
     </div>
   );
