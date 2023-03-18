@@ -19,7 +19,13 @@ const displayObject = {
   cert: false,
 };
 
-const Dashboard = ({ projects, handleDelete, handleAddNew }) => {
+const Dashboard = ({
+  projects,
+  handleDelete,
+  handleAddNew,
+  handleUpdate,
+  handleConnect,
+}) => {
   const { token, setToken } = useToken();
   const { display, setDisplay } = useDisplay();
   const [cdisplay, setcDisplay] = useState(
@@ -56,7 +62,7 @@ const Dashboard = ({ projects, handleDelete, handleAddNew }) => {
 
   return (
     <div className=" h-screen flex relative">
-      <div className="uppercase p-16 pt-12 pl-6 sticky h-full bg-gray-200 m-auto ">
+      <div className="uppercase p-16 pt-12 pl-6 sticky top-0 h-full bg-gray-200 m-auto ">
         <div
           className="flex items-center gap-1 cursor-pointer"
           onClick={() => handleOnClick("default")}
@@ -104,6 +110,8 @@ const Dashboard = ({ projects, handleDelete, handleAddNew }) => {
             projects={projects}
             handleDelete={handleDelete}
             handleAddNew={handleAddNew}
+            handleUpdate={handleUpdate}
+            handleConnect={handleConnect}
           />
         </div>
         <div className={` ${!display.blog && "hidden"}`}>

@@ -9,17 +9,25 @@ let fieldsState = {};
 let fieldsState2 = {};
 fields.forEach((field) => (fieldsState[field.id] = ""));
 
-const Project = ({ projects, handleDelete, handleAddNew }) => {
+const Project = ({
+  projects,
+  handleDelete,
+  handleAddNew,
+  handleUpdate,
+  handleConnect,
+}) => {
   const [toggleAdd, setToggleAdd] = useState(false);
 
   const [editState, setEditState] = useState(false);
+  const [editId, setEditId] = useState("");
   const projectCat = projects.filter(
     (project) => project.category === "project"
   );
 
   // handlers
   const handleEdit = (id) => {
-    setToggleAdd((prev) => !prev);
+    setEditId(id);
+    setToggleAdd(true);
     setEditState(true);
     let theObject = projects.filter((elem) => elem._id === id);
     let editObject = theObject[0];
@@ -49,6 +57,7 @@ const Project = ({ projects, handleDelete, handleAddNew }) => {
     });
   };
 
+  // Gen Addition
   const handleGenSubmit = async (object) => {
     try {
       await handleAddNew({
@@ -63,7 +72,25 @@ const Project = ({ projects, handleDelete, handleAddNew }) => {
       console.log(error);
     }
   };
+  // gen Update
   // constant headers
+  const handleGenUpdate = async (object, id) => {
+    try {
+      await handleUpdate(
+        {
+          proj_language: object.projectLanguage,
+          proj_name: object.projectName,
+          proj_tools: object.projectTools,
+          proj_ratings: object.projectRatings,
+          proj_link: object.projectLink,
+          category: "project",
+        },
+        id
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const columns = useMemo(
     () => [
       {
@@ -107,16 +134,19 @@ const Project = ({ projects, handleDelete, handleAddNew }) => {
           editState={editState}
           fieldsState={!editState ? fieldsState : fieldsState2}
           handleGenSubmit={handleGenSubmit}
+          handleGenUpdate={handleGenUpdate}
+          handleConnect={handleConnect}
+          editId={editId}
         />
       </>
     );
   }
 
   return (
-    <div>
+    <div className="min-h-screen overflow-auto bg-gray-100 text-gray-900">
       <span
         className="text-3xl text-green-300 uppercase flex items-center mb-2 cursor-pointer "
-        onClick={() => setToggleAdd((prev) => !prev)}
+        onClick={() => setToggleAdd(true)}
       >
         <GoPlus /> Add New
       </span>

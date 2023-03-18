@@ -1,5 +1,6 @@
 import { projectModel } from "../model/projectsModel.js";
 import { isValidObjectId } from "mongoose";
+import isEmpty from "is-empty";
 
 export const getProjects = async (req, res) => {
   let projects;
@@ -92,6 +93,9 @@ export const editProject = async (req, res) => {
   }
   if (!update) {
     return res.status(400).json({ message: "unabel to update" });
+  }
+  if (isEmpty(update)) {
+    return res.status(400).json({ message: `project with id: ${id} Empty` });
   }
   return res.status(200).json({ message: `project with id: ${id} is updated` });
 };

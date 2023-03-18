@@ -6,8 +6,11 @@ const AddNew = ({
   fields,
   fieldsState,
   handleGenSubmit,
+  handleGenUpdate,
   setEditState,
   editState,
+  editId,
+  handleConnect,
 }) => {
   const [submitState, setSubmitState] = useState(fieldsState);
 
@@ -16,18 +19,22 @@ const AddNew = ({
     setSubmitState({ ...submitState, [e.target.id]: e.target.value });
   };
 
+  // handle submit and edit
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    setEditState(false);
     if (editState) {
-      console.log("edit");
+      handleGenUpdate(submitState, editId);
     } else {
       handleGenSubmit(submitState);
     }
+    setToggleAdd(false);
   };
+
+  // handle go backe
   const handleGoBack = () => {
+    handleConnect();
     setEditState(false);
-    setToggleAdd((prev) => !prev);
+    setToggleAdd(false);
   };
 
   return (

@@ -51,7 +51,16 @@ const App = () => {
       })
       .catch((err) => console.log(err.response));
   };
-
+  // update
+  const handleUpdate = async (updateObject, id) => {
+    axios
+      .post(`http://localhost:5000/update/${id}`, updateObject)
+      .then((data) => {
+        handleConnect();
+        console.log(data.data);
+      })
+      .catch((err) => console.log(err.response));
+  };
   useEffect(() => {
     localStorage.setItem("theme", themeMode);
     if (localStorage) {
@@ -115,6 +124,8 @@ const App = () => {
                 setLastLocation={setLastLocation}
                 handleDelete={handleDelete}
                 handleAddNew={handleAddNew}
+                handleUpdate={handleUpdate}
+                handleConnect={handleConnect}
               />
             }
           />
