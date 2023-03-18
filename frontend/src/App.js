@@ -22,6 +22,36 @@ const App = () => {
     }
   };
 
+  // Api calls
+  const handleConnect = async () => {
+    axios
+      .get("http://localhost:5000/projects")
+      .then((data) => {
+        setProjects(data.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleDelete = async (id) => {
+    axios
+      .post("http://localhost:5000/delete", { id })
+      .then((data) => {
+        handleConnect();
+        console.log(data.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleAddNew = async (addObject) => {
+    axios
+      .post("http://localhost:5000/addProjects", addObject)
+      .then((data) => {
+        handleConnect();
+        console.log(data.data);
+      })
+      .catch((err) => console.log(err.response));
+  };
+
   useEffect(() => {
     localStorage.setItem("theme", themeMode);
     if (localStorage) {
@@ -39,19 +69,9 @@ const App = () => {
   }, [themeMode]);
 
   useEffect(() => {
-    const handleConnect = async () => {
-      axios
-        .get("http://localhost:5000/projects")
-        .then((data) => {
-          setProjects(data.data);
-        })
-        .catch((err) => console.log(err));
-    };
     handleConnect();
   }, []);
-  const handleDelete = () => {
-    console.log("delete successfull");
-  };
+
   const HomePage = () => {
     return (
       <div className=" w-full bg-white-theme dark:text-white dark:bg-dark-theme">
@@ -94,6 +114,7 @@ const App = () => {
                 lastLocation={lastLocation}
                 setLastLocation={setLastLocation}
                 handleDelete={handleDelete}
+                handleAddNew={handleAddNew}
               />
             }
           />

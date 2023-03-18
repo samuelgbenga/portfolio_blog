@@ -2,7 +2,7 @@ import { useTable } from "react-table";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
 
-const ProjectTable = ({ columns, data, handleDelete }) => {
+const ProjectTable = ({ columns, data, handleDelete, handleEdit }) => {
   const tableInstances = useTable({ columns, data });
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
@@ -33,7 +33,10 @@ const ProjectTable = ({ columns, data, handleDelete }) => {
                     onClick={() => handleDelete(row.values._id)}
                   />
                 </span>{" "}
-                <span className="text-blue-400 cursor-pointer">
+                <span
+                  className="text-blue-400 cursor-pointer"
+                  onClick={() => handleEdit(row.values._id)}
+                >
                   <FiEdit />
                 </span>{" "}
               </td>

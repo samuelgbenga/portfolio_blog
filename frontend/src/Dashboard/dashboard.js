@@ -10,6 +10,7 @@ import Blog from "./dashboardCompo/Blog";
 import Cert from "./dashboardCompo/Cert";
 import useDisplay from "./dashboardUtils/useDisplay";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const displayObject = {
   default: true,
@@ -18,7 +19,7 @@ const displayObject = {
   cert: false,
 };
 
-const Dashboard = ({ projects, handleDelete }) => {
+const Dashboard = ({ projects, handleDelete, handleAddNew }) => {
   const { token, setToken } = useToken();
   const { display, setDisplay } = useDisplay();
   const [cdisplay, setcDisplay] = useState(
@@ -85,6 +86,12 @@ const Dashboard = ({ projects, handleDelete }) => {
             <GrCertificate />
             Certifications
           </div>
+          <Link
+            to="/"
+            className="font-medium text-purple-600 hover:text-purple-500"
+          >
+            goto Home
+          </Link>
         </div>
       </div>
 
@@ -93,7 +100,11 @@ const Dashboard = ({ projects, handleDelete }) => {
           <DefaultPage />
         </div>
         <div className={` ${!display.project && "hidden"}`}>
-          <Project projects={projects} handleDelete={handleDelete} />
+          <Project
+            projects={projects}
+            handleDelete={handleDelete}
+            handleAddNew={handleAddNew}
+          />
         </div>
         <div className={` ${!display.blog && "hidden"}`}>
           <Blog projects={projects} handleDelete={handleDelete} />

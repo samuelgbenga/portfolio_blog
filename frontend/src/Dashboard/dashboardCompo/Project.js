@@ -1,11 +1,69 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import ProjectTable from "./Tables/ProjectTable";
+import { GoPlus } from "react-icons/go";
+import AddNew from "./AddNew/AddNew";
+import { projectFields } from "./AddNew/constants/FormFields";
 
-const Project = ({ projects, handleDelete }) => {
+const fields = projectFields;
+let fieldsState = {};
+let fieldsState2 = {};
+fields.forEach((field) => (fieldsState[field.id] = ""));
+
+const Project = ({ projects, handleDelete, handleAddNew }) => {
+  const [toggleAdd, setToggleAdd] = useState(false);
+
+  const [editState, setEditState] = useState(false);
   const projectCat = projects.filter(
     (project) => project.category === "project"
   );
 
+  // handlers
+  const handleEdit = (id) => {
+    setToggleAdd((prev) => !prev);
+    setEditState(true);
+    let theObject = projects.filter((elem) => elem._id === id);
+    let editObject = theObject[0];
+    // delete not needed properties
+    delete editObject["_id"];
+    delete editObject["category"];
+    delete editObject["__v"];
+    delete editObject["date"];
+
+    // replacing key names
+    editObject.projectLanguage = editObject.proj_language;
+    delete editObject.proj_language;
+    editObject.projectTools = editObject.proj_tools;
+    delete editObject.proj_tools;
+    editObject.projectName = editObject.proj_name;
+    delete editObject.proj_name;
+    editObject.projectRatings = editObject.proj_ratings;
+    delete editObject.proj_ratings;
+    editObject.projectLink = editObject.proj_link;
+    delete editObject.proj_link;
+    //console.log(editObject);
+    //
+
+    fields.forEach((field) => {
+      //console.log(editObject[field.id]);
+      return (fieldsState2[field.id] = editObject[field.id]);
+    });
+  };
+
+  const handleGenSubmit = async (object) => {
+    try {
+      await handleAddNew({
+        proj_language: object.projectLanguage,
+        proj_name: object.projectName,
+        proj_tools: object.projectTools,
+        proj_ratings: object.projectRatings,
+        proj_link: object.projectLink,
+        category: "project",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // constant headers
   const columns = useMemo(
     () => [
       {
@@ -15,6 +73,10 @@ const Project = ({ projects, handleDelete }) => {
       {
         Header: "Project",
         accessor: "proj_name",
+      },
+      {
+        Header: "Language",
+        accessor: "proj_language",
       },
       {
         Header: "Tools",
@@ -35,9 +97,36 @@ const Project = ({ projects, handleDelete }) => {
 
   const data = useMemo(() => projectCat, [projectCat]);
 
+  if (toggleAdd) {
+    return (
+      <>
+        <AddNew
+          setToggleAdd={setToggleAdd}
+          fields={projectFields}
+          setEditState={setEditState}
+          editState={editState}
+          fieldsState={!editState ? fieldsState : fieldsState2}
+          handleGenSubmit={handleGenSubmit}
+        />
+      </>
+    );
+  }
+
   return (
     <div>
-      <ProjectTable data={data} columns={columns} handleDelete={handleDelete} />
+      <span
+        className="text-3xl text-green-300 uppercase flex items-center mb-2 cursor-pointer "
+        onClick={() => setToggleAdd((prev) => !prev)}
+      >
+        <GoPlus /> Add New
+      </span>
+
+      <ProjectTable
+        data={data}
+        columns={columns}
+        handleDelete={handleDelete}
+        handleEdit={handleEdit}
+      />
     </div>
   );
 };
