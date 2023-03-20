@@ -41,4 +41,65 @@ const projectFields = [
   },
 ];
 
-export { projectFields };
+const certFields = [
+  {
+    labelText: "Certification Title",
+    labelFor: "certTitle",
+    id: "certTitle",
+    type: "text",
+    isRequired: true,
+    placeholder: "Title",
+  },
+  {
+    labelText: "Certification Description",
+    labelFor: "certDescription",
+    id: "certDescription",
+    type: "text",
+    isRequired: true,
+    placeholder: "Description of Certification",
+  },
+  {
+    labelText: "Issued Date",
+    labelFor: "certDate",
+    id: "certDate",
+    type: "text",
+    isRequired: true,
+    placeholder: "Date Issued",
+  },
+];
+const blogFields = [
+  {
+    labelText: "Blog Title",
+    labelFor: "blogTitle",
+    id: "blogTitle",
+    type: "text",
+    isRequired: true,
+    placeholder: "Title",
+  },
+  {
+    labelText: "Blog Summary",
+    labelFor: "blogDescription",
+    id: "blogDescription",
+    type: "textarea",
+    isRequired: true,
+    placeholder: "summary...",
+  },
+  {
+    labelText: "Content",
+    labelFor: "blogContent",
+    id: "blogContent",
+    type: "textarea",
+    isRequired: true,
+    placeholder: "content....",
+  },
+  {
+    labelText: "Published Date",
+    labelFor: "blogDate",
+    id: "blogDate",
+    type: "text",
+    isRequired: true,
+    placeholder: "Published Date",
+  },
+];
+
+export { projectFields, certFields, blogFields };

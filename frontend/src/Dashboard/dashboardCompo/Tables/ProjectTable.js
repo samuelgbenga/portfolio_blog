@@ -10,7 +10,7 @@ const ProjectTable = ({ columns, data, handleDelete, handleEdit }) => {
 
   return (
     <table {...getTableProps()} className="min-w-full divide-y divide-gray-200">
-      <thead lassName="bg-gray-50">
+      <thead className="bg-gray-50">
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column) => (
@@ -42,7 +42,7 @@ const ProjectTable = ({ columns, data, handleDelete, handleEdit }) => {
                   </td>
                 );
               })}
-              <td className="flex mx-4 py-4 items-center justify-center mt-1 gap-3">
+              <td className="flex mx-4 py-4 items-center justify-center mt-1 gap-3 ">
                 <span className="text-red-400  cursor-pointer">
                   <RiDeleteBin5Line
                     onClick={() => handleDelete(row.values._id)}

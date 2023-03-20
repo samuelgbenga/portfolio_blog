@@ -28,6 +28,7 @@ const Dashboard = ({
 }) => {
   const { token, setToken } = useToken();
   const { display, setDisplay } = useDisplay();
+  const [toggleAdd, setToggleAdd] = useState(false);
   const [cdisplay, setcDisplay] = useState(
     localStorage.dashboardcDisplay
       ? JSON.parse(localStorage.dashboardcDisplay)
@@ -37,7 +38,7 @@ const Dashboard = ({
   if (token) {
     setTimeout(() => {
       localStorage.removeItem("token");
-    }, 2400000);
+    }, 240000);
   }
 
   // handle onClick
@@ -113,13 +114,31 @@ const Dashboard = ({
               handleAddNew={handleAddNew}
               handleUpdate={handleUpdate}
               handleConnect={handleConnect}
+              toggleAdd={toggleAdd}
+              setToggleAdd={setToggleAdd}
             />
           </div>
           <div className={` ${!display.blog && "hidden"}`}>
-            <Blog projects={projects} handleDelete={handleDelete} />
+            <Blog
+              projects={projects}
+              handleDelete={handleDelete}
+              toggleAdd={toggleAdd}
+              setToggleAdd={setToggleAdd}
+              handleAddNew={handleAddNew}
+              handleUpdate={handleUpdate}
+              handleConnect={handleConnect}
+            />
           </div>
           <div className={` ${!display.cert && "hidden"}`}>
-            <Cert projects={projects} handleDelete={handleDelete} />
+            <Cert
+              projects={projects}
+              handleDelete={handleDelete}
+              toggleAdd={toggleAdd}
+              setToggleAdd={setToggleAdd}
+              handleAddNew={handleAddNew}
+              handleUpdate={handleUpdate}
+              handleConnect={handleConnect}
+            />
           </div>
         </main>
       </div>

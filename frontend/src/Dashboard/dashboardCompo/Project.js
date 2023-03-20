@@ -1,8 +1,9 @@
 import React, { useMemo, useState } from "react";
 import ProjectTable from "./Tables/ProjectTable";
-import { GoPlus } from "react-icons/go";
+import { projectHead } from "./Tables/TableCompo/TableCompo";
 import AddNew from "./AddNew/AddNew";
 import { projectFields } from "./AddNew/constants/FormFields";
+import { AddButton } from "./AddNew/Components/AddNewCompo";
 
 const fields = projectFields;
 let fieldsState = {};
@@ -15,14 +16,18 @@ const Project = ({
   handleAddNew,
   handleUpdate,
   handleConnect,
+  toggleAdd,
+  setToggleAdd,
 }) => {
-  const [toggleAdd, setToggleAdd] = useState(false);
+  //const [toggleAdd, setToggleAdd] = useState(false);
 
   const [editState, setEditState] = useState(false);
   const [editId, setEditId] = useState("");
   const projectCat = projects.filter(
     (project) => project.category === "project"
   );
+  const columns = useMemo(projectHead, []);
+  const data = useMemo(() => projectCat, [projectCat]);
 
   // handlers
   const handleEdit = (id) => {
@@ -53,21 +58,27 @@ const Project = ({
 
     fields.forEach((field) => {
       //console.log(editObject[field.id]);
-      return (fieldsState2[field.id] = editObject[field.id]);
+      fieldsState2[field.id] = editObject[field.id];
     });
+  };
+
+  // convert to object
+  const mainObject = (object) => {
+    return {
+      proj_language: object.projectLanguage,
+      proj_name: object.projectName,
+      proj_tools: object.projectTools,
+      proj_ratings: object.projectRatings,
+      proj_link: object.projectLink,
+      category: "project",
+    };
   };
 
   // Gen Addition
   const handleGenSubmit = async (object) => {
+    const theObject = mainObject(object);
     try {
-      await handleAddNew({
-        proj_language: object.projectLanguage,
-        proj_name: object.projectName,
-        proj_tools: object.projectTools,
-        proj_ratings: object.projectRatings,
-        proj_link: object.projectLink,
-        category: "project",
-      });
+      await handleAddNew(theObject);
     } catch (error) {
       console.log(error);
     }
@@ -75,54 +86,13 @@ const Project = ({
   // gen Update
   // constant headers
   const handleGenUpdate = async (object, id) => {
+    const theObject = mainObject(object);
     try {
-      await handleUpdate(
-        {
-          proj_language: object.projectLanguage,
-          proj_name: object.projectName,
-          proj_tools: object.projectTools,
-          proj_ratings: object.projectRatings,
-          proj_link: object.projectLink,
-          category: "project",
-        },
-        id
-      );
+      await handleUpdate(theObject, id);
     } catch (error) {
       console.log(error);
     }
   };
-  const columns = useMemo(
-    () => [
-      {
-        Header: "Project_id",
-        accessor: "_id",
-      },
-      {
-        Header: "Project",
-        accessor: "proj_name",
-      },
-      {
-        Header: "Language",
-        accessor: "proj_language",
-      },
-      {
-        Header: "Tools",
-        accessor: "proj_tools",
-      },
-      {
-        Header: "Url",
-        accessor: "proj_link",
-      },
-      {
-        Header: "Ratings",
-        accessor: "proj_ratings",
-      },
-      // extra
-    ],
-    []
-  );
-
-  const data = useMemo(() => projectCat, [projectCat]);
 
   if (toggleAdd) {
     return (
@@ -144,12 +114,7 @@ const Project = ({
 
   return (
     <div className="">
-      <span
-        className="text-3xl text-green-300 uppercase flex items-center mb-2 cursor-pointer "
-        onClick={() => setToggleAdd(true)}
-      >
-        <GoPlus /> Add New
-      </span>
+      <AddButton setToggleAdd={setToggleAdd} />
 
       <ProjectTable
         data={data}
