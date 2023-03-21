@@ -57,6 +57,10 @@ const Dashboard = ({
     setDisplay(cdisplay);
   }, [setDisplay, cdisplay]);
 
+  useEffect(() => {
+    console.log("hello world");
+  }, []);
+
   if (!token) {
     return <Login setToken={setToken} />;
   }

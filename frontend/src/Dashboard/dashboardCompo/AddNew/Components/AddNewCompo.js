@@ -1,5 +1,8 @@
 import { GoPlus } from "react-icons/go";
 
+// initiate or instatiations
+const fixedInputClass =
+  "rounded-md appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm";
 export const Input = ({
   handleChange,
   labelFor,
@@ -12,8 +15,10 @@ export const Input = ({
 }) => {
   if (type === "textarea") {
     return (
-      <div>
-        <label htmlFor={labelFor}>{labelText}</label>
+      <div className="my-5">
+        <label className="block" htmlFor={labelFor}>
+          {labelText}
+        </label>
         <textarea
           cols="30"
           rows="10"
@@ -23,6 +28,7 @@ export const Input = ({
           required={isRequired}
           placeholder={placeholder}
           value={value}
+          className={fixedInputClass}
         >
           {value}
         </textarea>
@@ -31,7 +37,7 @@ export const Input = ({
   }
 
   return (
-    <div>
+    <div className="my-5">
       <label htmlFor={labelFor}>{labelText}</label>
       <input
         value={value}
@@ -40,6 +46,7 @@ export const Input = ({
         id={id}
         required={isRequired}
         placeholder={placeholder}
+        className={fixedInputClass}
       />
     </div>
   );

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Input } from "./Components/AddNewCompo";
+import { BsArrowLeft } from "react-icons/bs";
 
 const AddNew = ({
   setToggleAdd,
@@ -73,7 +74,13 @@ const AddNew = ({
           )}
         </div>
       </form>
-      <button onClick={handleGoBack}>go back</button>
+      <button
+        onClick={handleGoBack}
+        className="cursor-pointer flex items-center gap-1 mt-3"
+      >
+        <BsArrowLeft />
+        go back
+      </button>
     </div>
   );
 };
