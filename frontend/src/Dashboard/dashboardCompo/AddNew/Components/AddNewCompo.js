@@ -19,10 +19,13 @@ export const Input = ({
           rows="10"
           onChange={handleChange}
           id={id}
+          name={id}
           required={isRequired}
           placeholder={placeholder}
           value={value}
-        ></textarea>
+        >
+          {value}
+        </textarea>
       </div>
     );
   }

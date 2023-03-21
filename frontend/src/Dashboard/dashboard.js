@@ -103,7 +103,7 @@ const Dashboard = ({
       </div>
 
       <div className="px-6 py-12 grow min-h-full bg-gray-100 text-gray-900 w-full overflow-x-hidden">
-        <main className="w-full mx-auto px-4 sm:px-6 lg:px-8 pt-4   overflow-x-scroll min-h-full">
+        <main className="w-full mx-auto px-4 sm:px-6 lg:px-8 pt-4   overflow-x-auto min-h-full">
           <div className={` ${!display.default && "hidden"}`}>
             <DefaultPage />
           </div>
