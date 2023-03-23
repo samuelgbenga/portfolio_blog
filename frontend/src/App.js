@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import UserProfile from "./components/userProfile";
 import UserPortfolio from "./components/userPortfolio";
 import { BsFillMoonStarsFill, BsFillSunFill } from "react-icons/bs";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import { useLocation } from "react-router";
 import Dashboard from "./Dashboard/dashboard";
 import SinglePost from "./components/subCompo/singlePost/singlePost";
 import axios from "axios";
@@ -11,7 +12,8 @@ const App = () => {
   const [dark, setDark] = useState(true);
   const [projects, setProjects] = useState([]);
   const [themeMode, setThemeMode] = useState(localStorage.theme);
-  const [lastLocation, setLastLocation] = useState("");
+  const [defaultDisplay, setDefaultDisplay] = useState(true);
+  let location = useLocation();
   const handleTheme = () => {
     setDark((prev) => !prev);
 
@@ -81,6 +83,18 @@ const App = () => {
     handleConnect();
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem(
+      "dashboardcDisplay",
+      JSON.stringify({
+        default: true,
+        project: false,
+        blog: false,
+        cert: false,
+      })
+    );
+  }, [location]);
+
   const HomePage = () => {
     return (
       <div className=" w-full bg-white-theme dark:text-white dark:bg-dark-theme">
@@ -107,35 +121,33 @@ const App = () => {
   };
 
   return (
-    <BrowserRouter>
-      <div
-        className={`w-full lg:min-h-screen text-black ${
-          dark && "dark"
-        } relative `}
-      >
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route
-            path="/admin"
-            element={
-              <Dashboard
-                projects={projects}
-                lastLocation={lastLocation}
-                setLastLocation={setLastLocation}
-                handleDelete={handleDelete}
-                handleAddNew={handleAddNew}
-                handleUpdate={handleUpdate}
-                handleConnect={handleConnect}
-              />
-            }
-          />
-          <Route
-            path="/content/:id"
-            element={<SinglePost projects={projects} />}
-          />
-        </Routes>
-      </div>
-    </BrowserRouter>
+    <div
+      className={`w-full lg:min-h-screen text-black ${
+        dark && "dark"
+      } relative `}
+    >
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/admin"
+          element={
+            <Dashboard
+              projects={projects}
+              setDefaultDisplay={setDefaultDisplay}
+              defaultDisplay={defaultDisplay}
+              handleDelete={handleDelete}
+              handleAddNew={handleAddNew}
+              handleUpdate={handleUpdate}
+              handleConnect={handleConnect}
+            />
+          }
+        />
+        <Route
+          path="/content/:id"
+          element={<SinglePost projects={projects} />}
+        />
+      </Routes>
+    </div>
   );
 };
 

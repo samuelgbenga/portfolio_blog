@@ -50,6 +50,7 @@ const Dashboard = ({
         setcDisplay((prev) => ({ ...prev, [elem]: false }));
       }
     });
+
     localStorage.setItem("dashboardcDisplay", JSON.stringify(cdisplay));
   };
 
@@ -57,9 +58,9 @@ const Dashboard = ({
     setDisplay(cdisplay);
   }, [setDisplay, cdisplay]);
 
-  useEffect(() => {
-    console.log("hello world");
-  }, []);
+  // useEffect(() => {
+  //   console.log("hello world");
+  // }, []);
 
   if (!token) {
     return <Login setToken={setToken} />;
